@@ -1433,10 +1433,9 @@ static int lfs_dir_getinfo(lfs_t *lfs, lfs_mdir_t *dir,
     if (tag < 0) {
         return (int)tag;
     }
-    lfs_ctz_fromle32(&ctz);
 
     if (lfs_tag_type3(tag) == LFS_TYPE_CTZSTRUCT) {
-        info->size = ctz.size;
+        info->size = lfs_fromle32(ctz.size);
     } else if (lfs_tag_type3(tag) == LFS_TYPE_INLINESTRUCT) {
         info->size = lfs_tag_size(tag);
     }
